@@ -576,12 +576,12 @@ function getTokenReplacement(xdate, token, getField, getSetting, useUTC) {
 		case 'HH'   : return zeroPad(getField(HOURS));
 		case 'd'    : return getField(DATE);
 		case 'dd'   : return zeroPad(getField(DATE));
-		case 'ddd'  : return getSetting('dayNamesShort')[getField(DAY)] || '';
-		case 'dddd' : return getSetting('dayNames')[getField(DAY)] || '';
+		case 'ddd'  : { const x = getSetting('dayNamesShort') || {}; return x[getField(DAY)] || '' };
+		case 'dddd' : { const x = getSetting('dayNames') || {}; return x[getField(DAY)] || '' };
 		case 'M'    : return getField(MONTH) + 1;
 		case 'MM'   : return zeroPad(getField(MONTH) + 1);
-		case 'MMM'  : return getSetting('monthNamesShort')[getField(MONTH)] || '';
-		case 'MMMM' : return getSetting('monthNames')[getField(MONTH)] || '';
+		case 'MMM'  : { const x = getSetting('monthNamesShort') || {}; return x[getField(MONTH)] || '' };
+		case 'MMMM' : { const x = getSetting('monthNames') || {}; return x[getField(MONTH)] || '' };
 		case 'yy'   : return (getField(FULLYEAR)+'').substring(2);
 		case 'yyyy' : return getField(FULLYEAR);
 		case 't'    : return _getDesignator(getField, getSetting).substr(0, 1).toLowerCase();
